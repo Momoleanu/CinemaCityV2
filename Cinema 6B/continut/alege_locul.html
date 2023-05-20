@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alege Locul din Sala</title>
+  <link rel="stylesheet" type="text/css" href="CSS/style.css">
+  <link rel="stylesheet" type="text/css" href="CSS/rezervari_locuri.css">
+
+</head>
+<body>
+  <div class="container">
+    <h1>Alege Locul din Sala</h1>
+    <div class="sala">
+      <div class="scaun ocupat"></div>
+      <div class="scaun liber" onclick="rezervaScaun(this)"></div>
+      <div class="scaun ocupat"></div>
+      <div class="scaun liber" onclick="rezervaScaun(this)"></div>
+      <!-- Adăugați aici scaunele pentru sala de cinema -->
+    </div>
+    <button onclick="finalizareRezervare()">Finalizare Rezervare</button>
+    <a class="back-link" href="cumpara.html">Înapoi</a>
+  </div>
+
+  <script>
+    function rezervaScaun(scaun) {
+      if (scaun.classList.contains("liber")) {
+        scaun.classList.remove("liber");
+        scaun.classList.add("selectat");
+      } else if (scaun.classList.contains("selectat")) {
+        scaun.classList.remove("selectat");
+        scaun.classList.add("liber");
+      }
+    }
+
+    function finalizareRezervare() {
+      var scauneRezervate = document.getElementsByClassName("selectat");
+
+      if (scauneRezervate.length === 0) {
+        alert("Vă rugăm să selectați cel puțin un scaun pentru a rezerva.");
+        return;
+      }
+
+      // Trimiterea către pagina de plată
+      window.location.href = "plateste.html";
+    }
+    <a class="back-link" href="javascript:history.back()">Înapoi</a>
+
+  </script>
+</body>
+</html>
