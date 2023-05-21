@@ -9,28 +9,20 @@
   <div class="container">
     <h1>Cumpără Bilet</h1>
     <form>
-        <label for="movie">Alege filmul:</label>
-        <select id="movie" name="movie">
-          <option value="film1">CARTEA MORTILOR: POSESIE DEMONICA</option>
-          <option value="film2">FURIOS SI IUTE X</option>
-          <option value="film3">Film 3</option>
-        </select>
-        
-        <label for="tickets">Număr de bilete:</label>
-        <input type="number" id="tickets" name="tickets" min="1" max="10">
-        
-        <label for="name">Numele tău:</label>
-        <input type="text" id="name" name="name">
-        
-        <label for="email">Adresa ta de email:</label>
-        <input type="email" id="email" name="email">
-        
-        <button onclick="redirectToAlegeLocul()">Alege Locul din Sala</button>
-      </form>
-      <a class="back-link" href="javascript:history.back()">Înapoi</a>
+      <label for="movie">Alege filmul:</label>
+      <select id="movie" name="movie">
+        <option value="film1">CARTEA MORTILOR: POSESIE DEMONICA</option>
+        <option value="film2">FURIOS SI IUTE X</option>
+        <option value="film3">Film 3</option>
+      </select>
+      
+      <label for="tickets">Număr de bilete:</label>
+      <input type="number" id="tickets" name="tickets" min="1" max="10">
+      
+      <button type="button" onclick="redirectToAlegeLocul()">Alege Locul din Sala</button>
+    </form>
+    <a class="back-link" href="javascript:history.back()">Înapoi</a>
+  </div>
 
-    </div>
-    
-  </body>
-  </html>
-  
+</body>
+</html>

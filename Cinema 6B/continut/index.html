@@ -6,12 +6,41 @@
   <script src="../JS/script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Cinema</h1>
-    <button onclick="loadFilme()">Vezi Filme</button>
-    <button onclick="loadCumpara()">Cumpără Bilet</button>
-    <div id="content"></div>
-  </div>
 
+  <div class="container">
+    <span id="admin-label"></span>  
+    <h1>Cinema 6B</h1><br></br>
+    <!--<img src="../Images/Sigla.jpg" alt="Trebuia sa fie un raton aici"> -->
+
+    <button onclick="loadFilme()">Vezi Filme</button>
+    <h2 class="program-title">Program
+      <div class="date-container">
+        <span class="current-date">Data de azi: <span id="currentDate"></span></span>
+      </div>
+    </h2>
+    <div id="content"></div>
+    <table class="program-table">
+      <tr>
+        <th>Film</th>
+        <th>Ora</th>
+      </tr>
+      <tr>
+        <td>Nume Film 1</td>
+        <td>12:00</td>
+      </tr>
+      <tr>
+        <td>Nume Film 2</td>
+        <td>15:30</td>
+      </tr>
+      <!-- Adăugați aici mai multe rânduri pentru program -->
+    </table>
+    <a href="admin_login.html" class="admin-link">Autentificare Administrator</a>
+  </div>
+  
+  <script>
+    var currentDateElement = document.getElementById("currentDate");
+    var currentDate = new Date();
+    currentDateElement.innerText = currentDate.toLocaleDateString();
+  </script>
 </body>
 </html>
