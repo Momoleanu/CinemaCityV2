@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach(var item in Model){
+        <p>@item.Name</p>
+         <p>@item.Description</p>
+          <div class="sala">
+         @for(int i =0; i<item.NoRow;i++)
+         {
+        @for (int j = 0; j < item.NoColumn;j++)
+        {
+                        <div class="scaun_liber" onclick = "rezervaScaun(this);" ></div>
+                        <br />
+        }
+        <br></br>
+         }
+         </div>
+}

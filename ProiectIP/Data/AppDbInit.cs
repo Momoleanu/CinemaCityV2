@@ -85,10 +85,10 @@ namespace ProiectIP.Data
                     {
                         new Movie()
                         {
-                            Title = "Ana are mere",
-                            Description = "Ana are pere",
+                            Title = "KANDAHAR: MISIUNE MORTALA",
+                            Description = "După ce a sabotează un reactor nuclear iranian, agentul CIA sub acoperire Tom Harris (Gerard Butler) descoperă că fotografia sa a fost răspândită în toată presa, când un turnător dezvăluie implicarea lui în distrugerea reactorului. Dar reporterul care a primit informațiile despre Harris este arestat de Garda Revoluționară a Iranului, așa că Harris are la dispoziție 30 de ore pentru a găsi o cale de scapare.",
                             Price = "30",
-                            ImageURL = "url",
+                            ImageURL = "https://www.cinemacity.ro/xmedia-cw/repo/feats/posters/5742S2R-lg.jpg",
                             StartTime = DateTime.Now.AddDays(-10),
                             EndTime = DateTime.Now.AddDays(-2),
                             MovieCategory = MovieCategory.Action,
@@ -96,33 +96,33 @@ namespace ProiectIP.Data
                         },
                         new Movie()
                         {
-                            Title = "Ana are mere",
-                            Description = "Ana are pere",
-                            Price = "30",
-                            ImageURL = "url",
-                            StartTime = DateTime.Now.AddDays(-10),
+                            Title = "BAUBAUL",
+                            Description = "Încă suferind după moartea recentă a mamei lor, o adolescentă și sora ei mai mică încep să fie terorizate în propria casă de o prezență sadică. Lipsite de ajutor, cele două fete trebuie să-și scoată tatăl din letargia provocată de pierderea suferită de familia lor înainte de-a fi prea târziu.",
+                            Price = "25",
+                            ImageURL = "https://www.cinemacity.ro/xmedia-cw/repo/feats/posters/5659S2R-lg.jpg",
+                            StartTime = DateTime.Now.AddDays(-3),
                             EndTime = DateTime.Now.AddDays(-2),
-                            MovieCategory = MovieCategory.Drama,
+                            MovieCategory = MovieCategory.Horror,
                             RoomId = 1
                         },
                         new Movie()
                         {
-                            Title = "Ana are mere",
-                            Description = "Ana are pere",
+                            Title = "OMUL-PAIANJEN: PRIN LUMEA PAIANJENULUI",
+                            Description = "Miles Morales revine pentru următorul capitol din saga Spider-Verse, câștigătoare a premiului Oscar. O aventură epică in care prietenosul Om Păianjen isi va uni forțele cu Gwen Stacy și o nouă echipă de Oameni Păianjeni pentru a se confrunta cu un răufăcător mai puternic decât orice au întâlnit vreodată.",
                             Price = "30",
-                            ImageURL = "url",
-                            StartTime = DateTime.Now.AddDays(-10),
+                            ImageURL = "https://www.cinemacity.ro/xmedia-cw/repo/feats/posters/4923S2R-lg.jpg",
+                            StartTime = DateTime.Now.AddDays(-4),
                             EndTime = DateTime.Now.AddDays(-2),
-                            MovieCategory = MovieCategory.Comedy,
+                            MovieCategory = MovieCategory.SF,
                             RoomId = 1
                         },
                         new Movie()
                         {
-                            Title = "Ana are mere",
-                            Description = "Ana are pere",
+                            Title = "FLASH",
+                            Description = "Barry Allen/Flash își folosește super-viteza pentru a schimba trecutul, dar încercarea lui de a-și salva familia creează o lume fără supereroi, forțându-l să pornească într-o misiune pentru a salva viitorul.",
                             Price = "30",
-                            ImageURL = "url",
-                            StartTime = DateTime.Now.AddDays(-10),
+                            ImageURL = "https://www.cinemacity.ro/xmedia-cw/repo/feats/posters/5637S2R-lg.jpg",
+                            StartTime = DateTime.Now.AddDays(-7),
                             EndTime = DateTime.Now.AddDays(-2),
                             MovieCategory = MovieCategory.SF,
                             RoomId = 1
@@ -138,17 +138,17 @@ namespace ProiectIP.Data
                         new Actor_Movie()
                         {
                             ActorId = 1,
-                            MovieId = 6
+                            MovieId = 10
                         },
                         new Actor_Movie()
                         {
                             ActorId = 2,
-                            MovieId = 7
+                            MovieId = 11
                         },
                         new Actor_Movie()
                         {
                             ActorId = 4,
-                            MovieId = 8
+                            MovieId = 12
                         }
                     });
                     context.SaveChanges();

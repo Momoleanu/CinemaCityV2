@@ -20,18 +20,14 @@ function loadCumpara() {
 function redirectToAlegeLocul() {
     window.location.href = "alege_locul.html";
 }
-var trailerContainer = document.getElementById("trailer-container");
 
-// URL-ul încorporat al trailerului video
-var trailerUrl = "https://www.youtube.com/embed/VIDEO_ID";
+function rezervaScaun(scaun) {
+    if (scaun.className === "scaun_liber") {
+        scaun.className = "scaun_selectat";
+        console.log("bhbkbbhk");
+    } else if (scaun.classList.contains("selectat")) {
+        scaun.classList.remove("selectat");
+        scaun.classList.add("liber");
+    }
 
-// Generați codul iframe pentru încorporarea trailerului
-var iframe = document.createElement("iframe");
-iframe.src = trailerUrl;
-iframe.width = "560";
-iframe.height = "315";
-iframe.frameborder = "0";
-iframe.allowfullscreen = true;
-
-// Adăugați iframe-ul în containerul trailerului
-trailerContainer.appendChild(iframe);
+}

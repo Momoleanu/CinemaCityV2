@@ -2,6 +2,6 @@
 {
     public enum MovieCategory
     {
-        Action=1, Comedy, Drama, SF
+        Action=1, Comedy, Drama, SF, Horror
     }
 }

@@ -6,14 +6,16 @@
     <title>@ViewData["Title"] - ProiectIP</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
     <h1>Cinema</h1>
-    <button onclick="loadFilme()">Filme</button>
-    <button onclick="loadFilme()">Sali</button>
+     <a href="/"><button>Acasa</button></a>
+    <a href="/movies"><button>Filme</button></a>
+    <a href = "/rooms"><button >Sali</button></a>
     <button onclick="loadCumpara()">Cumpără Bilet</button>
     <button onclick="loadCumpara()">Despre</button>
     <div id="content"></div>

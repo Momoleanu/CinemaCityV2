@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace ProiectIP.Controllers
 {
-    public class RoomController : Controller
+    public class RoomsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public RoomController(AppDbContext context)
+        public RoomsController(AppDbContext context)
         {
             _context = context;
         }
         public async Task<IActionResult> Index()
         {
             var allRooms = await _context.Rooms.ToListAsync();
-            return View();
+            return View(allRooms);
         }
     }
 }
