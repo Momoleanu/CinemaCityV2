@@ -48,9 +48,9 @@
       <label for="nume">Nume:</label>
       <input type="text" id="nume" name="nume" required>
 
-      <label for="adresa">Adresă:</label>
-      <input type="text" id="adresa" name="adresa" required>
-
+      <label for="email">Adresa de email:</label>
+      <input type="email" id="email" name="email" required>
+ 
       <label for="card">Număr Card de Credit:</label>
       <input type="text" id="card" name="card" required>
 
@@ -60,7 +60,13 @@
       <label for="cvv">CVV:</label>
       <input type="text" id="cvv" name="cvv" required>
 
-      <input type="submit" value="Finalizare Plată">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="YOUR_BUTTON_ID">
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+
     </form>
     <a class="back-link" href="javascript:history.back()">Înapoi</a>
 
