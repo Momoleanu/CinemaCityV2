@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <h2>@Model.movie.Title</h2><br></br>
+    <div class="media-container">
+      <img src="@Model.Movie.ImageURL" alt="Nume Film">
+      <br></br>
+      <iframe width="560" height="315" src="@Model.Movie.TrailerURL" title="@Model.Movie.Title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <br></br>
+    <p style="text-align: center;">@Model.Movie.Description</p>
+    <br></br>
+        <button>Cumpără Bilet</button>
+    <a class="back-link" href="/movies">Înapoi</a>
+  </div>

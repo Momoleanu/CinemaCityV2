@@ -16,6 +16,7 @@ namespace ProiectIP.Models
         public string Description { get; set; }
         public string Price { get; set; }
         public string ImageURL { get; set; }
+        public string TrailerURL { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public MovieCategory MovieCategory { get; set; }

@@ -16,6 +16,7 @@ namespace ProiectIP.Controllers
         public async Task<IActionResult> Index()
         {
             var allRooms = await _context.Rooms.ToListAsync();
+
             return View(allRooms);
         }
     }
