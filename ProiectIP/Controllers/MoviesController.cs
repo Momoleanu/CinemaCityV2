@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProiectIP.Data;
+using ProiectIP.Models;
 using System;
 using System.Dynamic;
 using System.Linq;
@@ -26,18 +27,10 @@ namespace ProiectIP.Controllers
         {
             Console.WriteLine(id);
             dynamic mymodel = new ExpandoObject();
-            mymodel.movie =  _context.Movies.Where(x => x.Id == id).FirstOrDefault();
-
-            mymodel.actors = _context.Actors_Movies
-                         .Where(movieActor => movieActor.MovieId == id)
-                         .Join(
-                            _context.Actors,
-                            movieActor => movieActor.ActorId,
-                            actor => actor.Id,
-                            (movieActor, actor) => actor
-                            )
-                         .ToList();
-
+            mymodel.Movie =  _context.Movies.Where(x => x.Id == id).FirstOrDefault();
+            //mymodel.Actors = from a in _context.Actors join am in _context.Actors_Movies
+                             //on a.Id equals am.ActorId join m in _context.Movies 
+              //on m.Id equals am.MovieId
             return View(mymodel);
         }
     }
