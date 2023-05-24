@@ -28,6 +28,16 @@ namespace ProiectIP.Controllers
             dynamic mymodel = new ExpandoObject();
             mymodel.movie =  _context.Movies.Where(x => x.Id == id).FirstOrDefault();
 
+            mymodel.actors = _context.Actors_Movies
+                         .Where(movieActor => movieActor.MovieId == id)
+                         .Join(
+                            _context.Actors,
+                            movieActor => movieActor.ActorId,
+                            actor => actor.Id,
+                            (movieActor, actor) => actor
+                            )
+                         .ToList();
+
             return View(mymodel);
         }
     }
