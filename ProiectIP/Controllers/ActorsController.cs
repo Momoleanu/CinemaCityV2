@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProiectIP.Data;
 using ProiectIP.Data.Services;
+using ProiectIP.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,14 +10,14 @@ namespace ProiectIP.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly IActorsService _service;
-        public ActorsController(IActorsService service)
+        private readonly AppDbContext _context;
+        public ActorsController(AppDbContext context)
         {
-            _service = service;
+            _context = context;
         }
-        public async Task<IActionResult> Index()
+        public  IActionResult Actor(int id)
         {
-            var data = await _service.GetAll();
+            var data = _context.Actors.Where(x => x.Id == id).FirstOrDefault();
             return View(data);
         }
     }

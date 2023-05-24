@@ -5,7 +5,7 @@
   @foreach(var item in Model)
   {
           <div class="film">
-              <img src="@item.ImageURL" alt="Nume Film">
+              <img src="@item.ImageURL" alt="@item.Title">
           <div class="film-details">
 
                   <h2><a href="/movies/movie/@item.Id">@item.Title</a></h2>

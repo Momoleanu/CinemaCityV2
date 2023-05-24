@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <h2>@Model.movie.Title</h2><br></br>
+    <h2>@Model.Movie.Title</h2><br></br>
     <div class="media-container">
       <img src="@Model.Movie.ImageURL" alt="Nume Film">
       <br></br>
@@ -15,5 +15,12 @@
     <p style="text-align: center;">@Model.Movie.Description</p>
     <br></br>
         <button>Cumpără Bilet</button>
-    <a class="back-link" href="/movies">Înapoi</a>
+            <a class="back-link" href="/movies">Înapoi</a>
+            <br />
+            <br />
+    @foreach(var actor in Model.Actors){
+                            <a href = "/actors/actor/@actor.Id"><img src="@actor.PictureURL" alt="@actor.FullName" width=150px height = 200px>
+        <p>@actor.FullName</p></a>
+    }
+
   </div>
