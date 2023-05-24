@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
 namespace ProiectIP.Controllers
 {
     public class AdminController : Controller
@@ -27,11 +27,14 @@ namespace ProiectIP.Controllers
             if (lines[0] == username && lines[1] == password)
             {
                 Console.WriteLine(lines[0] + lines[1]);
-                var resp = new HttpResponseMessage();
+                HttpContext.Response.Cookies.Append("AdminCookie", "true", new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(1)
+                });
 
-                
+
             }
-                return 
+            return View();
             
         }
     }
