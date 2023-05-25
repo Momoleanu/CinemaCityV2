@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ProiectIP.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProiectIP.Controllers
 {
@@ -107,6 +108,7 @@ namespace ProiectIP.Controllers
         }
         [Authorize("AdminPolicy")]
         [HttpPost]
+        [Route("/admin/create-movie")]
         public async Task<IActionResult> CreateMovie(Movie movie)
         {
            
@@ -121,7 +123,24 @@ namespace ProiectIP.Controllers
             }
 
            
-            return View(movie);
+            return RedirectToAction("AdminPage", "Admin");
+        }
+        [Authorize("AdminPolicy")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            Console.WriteLine(id);
+            if (ModelState.IsValid)
+            {
+                Movie movie = _context.Movies.Find(id);
+                _context.Movies.Remove(movie);
+               await _context.SaveChangesAsync();
+
+
+                return RedirectToAction("Index", "Movies");
+            }
+
+
+            return RedirectToAction("Index", "Movies");
         }
         //Nu merge ceva la adaugare da eroare 405 cand pun return View(movie) si nu mai afiseaza nici formularul
 
@@ -130,10 +149,10 @@ namespace ProiectIP.Controllers
         [HttpGet]
         [Authorize("AdminPolicy")]
         [Route("/admin/create-movie")]
-        public IActionResult CreateMovie()
+        public IActionResult GetCreateMovie()
         {
            
-            return View();
+            return View("CreateMovie");
         }
 
         [HttpGet]
@@ -143,7 +162,7 @@ namespace ProiectIP.Controllers
             HttpContext.SignOutAsync("AdminScheme");
             Response.Cookies.Delete("AdminScheme"); 
             //Poti sa pui return View("Login") ca sa te dea direct pe formular
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
 

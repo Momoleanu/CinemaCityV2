@@ -2,10 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
- <a href="/admin/logout" class="btn btn-primary">Logout</a>
-}
+
 
 @if ((bool)(ViewBag.CanCreateMovies ?? false))
 {

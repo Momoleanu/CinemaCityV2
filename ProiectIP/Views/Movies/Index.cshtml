@@ -2,6 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+        <a href="/admin/create-movie" class="btn btn-primary">Creează film</a>
+}
   @foreach(var item in Model)
   {
           <div class="film">
@@ -11,6 +15,10 @@
                   <h2><a href="/movies/movie/@item.Id">@item.Title</a></h2>
           <p>2D</p>
               <p>Pret : @item.Price</p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                               <a href="admin/deletemovie/@item.Id"><button >Sterge film</button></a> 
+            }
           </div>
         </div>
     <br></br>
