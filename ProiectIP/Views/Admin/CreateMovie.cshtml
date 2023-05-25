@@ -1,0 +1,52 @@
+﻿
+
+@{
+    ViewData["Title"] = "Create Movie";
+}
+
+<h2>Introdu un film</h2>
+
+<form method="post" asp-controller="Admin" asp-action="CreateMovie" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Title">Title:</label>
+        <input type="text" class="form-control" id="Title" name="Title" required>
+    </div>
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea class="form-control" id="Description" name="Description" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Price">Price:</label>
+        <input type="number" class="form-control" id="Price" name="Price" required>
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">Image URL:</label>
+        <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" required>
+    </div>
+    <div class="form-group">
+        <label for="StartTime">Start Time:</label>
+        <input type="datetime-local" class="form-control" id="StartTime" name="StartTime" required>
+    </div>
+    <div class="form-group">
+        <label for="EndTime">End Time:</label>
+        <input type="datetime-local" class="form-control" id="EndTime" name="EndTime" required>
+    </div>
+    <div class="form-group">
+        <label for="MovieCategory">Movie Category:</label>
+        <select class="form-control" id="MovieCategory" name="MovieCategory" required>
+            <!--Pune aici cu un for sa afiseze MovieCategory ale noastre-->
+            <option value="SF">SF</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="RoomId">Room ID:</label>
+        <input type="text" class="form-control" id="RoomId" name="RoomId" required>
+    </div>
+    <div class="form-group">
+        <label for="TrailerURL">Trailer URL:</label>
+        <input type="text" class="form-control" id="TrailerURL" name="TrailerURL" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

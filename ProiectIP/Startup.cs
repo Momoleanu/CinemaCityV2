@@ -27,22 +27,32 @@ namespace ProiectIP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Adaugare db context config
-            //Constructor sql
+            // Adaugare db context config
+            // Constructor sql
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             services.AddControllersWithViews();
 
-            //Configurare Servicii
+            // Configurare Servicii
             services.AddScoped<IActorsService, ActorsService>();
 
             services.AddMemoryCache();
             services.AddSession();
             services.AddAuthentication("AdminScheme")
-                 .AddCookie("AdminScheme", options =>
-                 {
-                     options.LoginPath = "/admin/login"; 
-                     options.ExpireTimeSpan = TimeSpan.FromMinutes(30); 
-                });
+                .AddCookie("AdminScheme", options =>
+                {
+                    options.LoginPath = "/admin/login";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    options.SlidingExpiration = true;
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnSigningOut = context =>
+                        {
+                            context.Response.Cookies.Delete("AdminScheme");
+                            return Task.CompletedTask;
+                        }
+                    };
+                    options.Cookie.IsEssential = true;
+        });
 
             services.AddAuthorization(options =>
             {
@@ -51,7 +61,6 @@ namespace ProiectIP
                     policy.RequireAuthenticatedUser();
                 });
             });
-
         }
 
 
@@ -87,7 +96,14 @@ namespace ProiectIP
                     name: "admin-login",
                     pattern: "admin/login",
                     defaults: new { controller = "Admin", action = "Login" }
+
                 );
+                endpoints.MapControllerRoute(
+             name: "admin-logout",
+             pattern: "admin/logout",
+             defaults: new { controller = "Admin", action = "Logout" }
+         );
+
             });
 
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using ProiectIP.Models;
 
 namespace ProiectIP.Controllers
 {
@@ -105,13 +106,46 @@ namespace ProiectIP.Controllers
             return View(mymodel);
         }
 
-        [HttpPost]
-        [Route("/admin/logout")]
-        public async Task<IActionResult> Logout()
+        //Asta ar trebui sa fie pentru adaugare, dar nu merge.
+        /*public async Task<IActionResult> CreateMovie(Movie movie)
         {
-            await HttpContext.SignOutAsync("AdminScheme");
-            return View("Login");
+           
+            if (ModelState.IsValid)
+            {
+                
+                _context.Movies.Add(movie);
+                await _context.SaveChangesAsync();
+
+                
+                return RedirectToAction("AdminPage", "Admin");
+            }
+
+           
+            return View(movie);
+        }*/
+        //Nu merge ceva la adaugare da eroare 405 cand pun return View(movie) si nu mai afiseaza nici formularul
+
+
+        //Functia asta doar afiseaza formularul o sa trebuiasca stearsa
+        [HttpGet]
+        [Authorize("AdminPolicy")]
+        [Route("/admin/create-movie")]
+        public IActionResult CreateMovie()
+        {
+           
+            return View();
         }
+
+        [HttpGet]
+        [Route("/admin/logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync("AdminScheme");
+            Response.Cookies.Delete("AdminScheme"); 
+            //Poti sa pui return View("Login") ca sa te dea direct pe formular
+            return View();
+        }
+
 
     }
 }
