@@ -138,20 +138,20 @@ namespace ProiectIP.Data
                         new Actor_Movie()
                         {
                             ActorId = 1,
-                            MovieId = 10
+                            MovieId = 1
                         },
                         new Actor_Movie()
                         {
                             ActorId = 2,
-                            MovieId = 11
+                            MovieId = 2
                         },
                         new Actor_Movie()
                         {
                             ActorId = 4,
-                            MovieId = 12
+                            MovieId = 3
                         }
                     });
-                    context.SaveChanges();
+                  context.SaveChanges();
                 }
             }
         }

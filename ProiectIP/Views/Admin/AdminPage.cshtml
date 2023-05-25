@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="/admin/logout" class="btn btn-primary">Logout</a>
+}
+
+@if ((bool)(ViewBag.CanCreateMovies ?? false))
+{
+    <a href="/admin/create-movie" class="btn btn-primary">Creează film</a>
+}
+
+<p>fgdfhdhdgfhj</p>

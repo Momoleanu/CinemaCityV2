@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +29,7 @@ namespace ProiectIP
         {
             //Adaugare db context config
             //Constructor sql
-            services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             services.AddControllersWithViews();
 
             //Configurare Servicii
@@ -37,11 +37,23 @@ namespace ProiectIP
 
             services.AddMemoryCache();
             services.AddSession();
-            services.AddAuthentication(options =>
+            services.AddAuthentication("AdminScheme")
+                 .AddCookie("AdminScheme", options =>
+                 {
+                     options.LoginPath = "/admin/login"; 
+                     options.ExpireTimeSpan = TimeSpan.FromMinutes(30); 
+                });
+
+            services.AddAuthorization(options =>
             {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.AddPolicy("AdminPolicy", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                });
             });
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,7 +72,7 @@ namespace ProiectIP
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseCookiePolicy();
@@ -70,7 +82,14 @@ namespace ProiectIP
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "admin-login",
+                    pattern: "admin/login",
+                    defaults: new { controller = "Admin", action = "Login" }
+                );
             });
+
 
             AppDbInit.Seed(app);
         }

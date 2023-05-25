@@ -10,16 +10,36 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-    <h1>Cinema</h1>
-     <a href="/"><button>Acasa</button></a>
-    <a href="/movies"><button>Filme</button></a>
-    <a href = "/rooms"><button >Sali</button></a>
-    <button onclick="loadCumpara()">Cumpără Bilet</button>
-    <button onclick="loadCumpara()">Despre</button>
-    <a href="/admin"><button>Admin</button></a>
-    <div id="content"></div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <h1>Cinema</h1>
+            @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/admin/adminPage"><button>Acasă</button></a>
+                }
+                else
+                {
+                     <a href="/"><button>Acasă</button></a>
+                }
+            <a href="/movies"><button>Filme</button></a>
+            <a href="/rooms"><button>Sali</button></a>
+            <button onclick="loadCumpara()">Cumpără Bilet</button>
+            <button onclick="loadCumpara()">Despre</button>
+            @if (User.Identity.IsAuthenticated)
+            {
+                    <a href="/admin"><button hidden>Autentificare Admin</button></a>
+            }
+                else
+                {
+                    <a href="/admin"><button>Autentificare Admin</button></a>
+                }
+        </div>
+    </nav>
+</header>
+<div id="content"></div>
+
+<div id="content"></div>
+
   </div>
 
         </nav>
