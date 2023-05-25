@@ -105,9 +105,9 @@ namespace ProiectIP.Controllers
 
             return View(mymodel);
         }
-
-        //Asta ar trebui sa fie pentru adaugare, dar nu merge.
-        /*public async Task<IActionResult> CreateMovie(Movie movie)
+        [Authorize("AdminPolicy")]
+        [HttpPost]
+        public async Task<IActionResult> CreateMovie(Movie movie)
         {
            
             if (ModelState.IsValid)
@@ -122,7 +122,7 @@ namespace ProiectIP.Controllers
 
            
             return View(movie);
-        }*/
+        }
         //Nu merge ceva la adaugare da eroare 405 cand pun return View(movie) si nu mai afiseaza nici formularul
 
 
