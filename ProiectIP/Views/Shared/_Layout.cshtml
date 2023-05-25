@@ -59,5 +59,17 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    @Html.C1().FlexGrid()
+    @Html.C1().InputData()
+    @Html.C1().FinancialChart()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Html.C1().Scrpits()
+    @RenderSection("scripts", required:false)
+    @Html.C1().Styles().Theme("cocoa")
+    @Html.C1().Scripts().Basic().Finance().FlexSheet().FlexViewer().Olap().MultiRow()
 </body>
 </html>
