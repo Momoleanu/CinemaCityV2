@@ -55,11 +55,6 @@ namespace ProiectIP.Controllers
         [HttpPost]
         public IActionResult Buy(string title, string price, int quantity, string email, bool subscribe)
         {
-            Console.WriteLine(title);
-            Console.WriteLine(price);
-            Console.WriteLine(quantity);
-            Console.WriteLine(email);
-            Console.WriteLine(subscribe);
             var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
             if (movie == null)
             {
