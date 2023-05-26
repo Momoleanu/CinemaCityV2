@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using ProiectIP.Controllers;
 using ProiectIP.Data;
 using ProiectIP.Data.Services;
+using ProiectIP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,14 @@ namespace ProiectIP
             // Constructor sql
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
             services.AddControllersWithViews();
+            services.AddScoped<IMovieObserver, EmailMovieObserver>();
 
             // Configurare Servicii
-            services.AddScoped<IActorsService, ActorsService>();
+           
             services.AddTransient<MoviesController>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddMemoryCache();
             services.AddSession();

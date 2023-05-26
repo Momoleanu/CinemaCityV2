@@ -9,16 +9,20 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ProiectIP.Models;
 using Microsoft.EntityFrameworkCore;
+using ProiectIP.Data.Services;
 
 namespace ProiectIP.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly AppDbContext _context;
 
-        public AdminController(AppDbContext context)
+        private readonly AppDbContext _context;
+        private readonly IMovieObserver _movieObserver;
+
+        public AdminController(AppDbContext context, IMovieObserver movieObserver)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _movieObserver = movieObserver ?? throw new ArgumentNullException(nameof(movieObserver));
         }
 
         [HttpGet]
@@ -33,10 +37,10 @@ namespace ProiectIP.Controllers
         [Route("/admin/login")]
         public async Task<IActionResult> Login(string username, string password, string returnUrl = "")
         {
-            
+
             if (username == "admin" && password == "admin")
             {
-                
+
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, username)
@@ -50,10 +54,10 @@ namespace ProiectIP.Controllers
                     IsPersistent = true
                 };
 
-                
+
                 var principal = new ClaimsPrincipal(claimsIdentity);
 
-                
+
                 await HttpContext.SignInAsync(principal, authProperties);
 
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
@@ -62,7 +66,7 @@ namespace ProiectIP.Controllers
                     return RedirectToAction("AdminPage");
             }
 
-           
+
             ViewBag.ErrorMessage = "Nume de utilizator sau parolă incorecte.";
             return View();
         }
@@ -72,14 +76,14 @@ namespace ProiectIP.Controllers
         [Route("/admin")]
         public IActionResult Index()
         {
-           
+
             if (Request.Cookies["admin"] != null && Request.Cookies["admin"] == "true")
             {
-               
+
                 return View("AdminPage");
             }
 
-            
+
             return View("Login");
         }
 
@@ -88,15 +92,15 @@ namespace ProiectIP.Controllers
         [Route("/admin/adminpage")]
         public IActionResult AdminPage()
         {
-           
+
             if (User.Identity.IsAuthenticated && User.Identity.Name == "admin")
             {
-               
+
                 ViewBag.CanCreateMovies = true;
             }
             else
             {
-                
+
                 ViewBag.CanCreateMovies = false;
             }
 
@@ -107,34 +111,32 @@ namespace ProiectIP.Controllers
             return View(mymodel);
         }
         [Authorize("AdminPolicy")]
-        [HttpPost]
         [Route("/admin/create-movie")]
-        public async Task<IActionResult> CreateMovie(Movie movie)
+        [HttpPost]
+        public async Task<IActionResult> CreateMovie(Movie movie, [FromServices] IMovieObserver movieObserver)
         {
-           
             if (ModelState.IsValid)
             {
-                
                 _context.Movies.Add(movie);
                 await _context.SaveChangesAsync();
 
-                
+                movieObserver.NotifyMovieAdded(movie);
+
                 return RedirectToAction("AdminPage", "Admin");
             }
 
-           
             return RedirectToAction("AdminPage", "Admin");
         }
         [Authorize("AdminPolicy")]
-        public async Task<IActionResult> DeleteMovie(int id)
+        public async Task<IActionResult> DeleteMovie(int id, [FromServices] IMovieObserver movieObserver)
         {
             Console.WriteLine(id);
             if (ModelState.IsValid)
             {
                 Movie movie = _context.Movies.Find(id);
                 _context.Movies.Remove(movie);
-               await _context.SaveChangesAsync();
-
+                await _context.SaveChangesAsync();
+                movieObserver.NotifyMovieDeleted(movie);
 
                 return RedirectToAction("Index", "Movies");
             }
@@ -151,7 +153,7 @@ namespace ProiectIP.Controllers
         [Route("/admin/create-movie")]
         public IActionResult GetCreateMovie()
         {
-           
+
             return View("CreateMovie");
         }
 
@@ -160,9 +162,9 @@ namespace ProiectIP.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync("AdminScheme");
-            Response.Cookies.Delete("AdminScheme"); 
+            Response.Cookies.Delete("AdminScheme");
             //Poti sa pui return View("Login") ca sa te dea direct pe formular
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
 

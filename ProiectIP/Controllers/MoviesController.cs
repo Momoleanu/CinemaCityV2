@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProiectIP.Data;
+using ProiectIP.Data.Services;
 using ProiectIP.Models;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,7 +51,7 @@ namespace ProiectIP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(string title, string price, int quantity)
+        public IActionResult Buy(string title, string price, int quantity, string email, bool subscribe)
         {
             var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
             if (movie == null)
@@ -56,12 +59,25 @@ namespace ProiectIP.Controllers
                 return NotFound();
             }
 
+            if (!string.IsNullOrEmpty(email) && subscribe)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "subscribers.txt");
+                try
+                {
+                    System.IO.File.AppendAllText(filePath, email + Environment.NewLine);
+                    Console.WriteLine("Adresa de email a fost adaugată în fisier.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Eroare la scrierea în fișier: {ex.Message}");
+                }
+            }
+
             return RedirectToAction("Confirmation", new { movieId = movie.Id, quantity = quantity });
         }
 
         public IActionResult Confirmation(int movieId, int quantity)
         {
-            
             var movie = _context.Movies.FirstOrDefault(m => m.Id == movieId);
 
             ViewData["MovieTitle"] = movie?.Title;
@@ -72,7 +88,6 @@ namespace ProiectIP.Controllers
 
         public IActionResult Success()
         {
-           
             return View();
         }
     }
