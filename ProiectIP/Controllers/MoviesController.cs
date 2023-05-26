@@ -17,27 +17,63 @@ namespace ProiectIP.Controllers
         {
             _context = context;
         }
+
         public async Task<IActionResult> Index()
         {
             var allMovies = await _context.Movies.ToListAsync();
             return View(allMovies);
         }
 
-        public  IActionResult Movie(int id)
+        public IActionResult Movie(int id)
         {
-            Console.WriteLine(id);
+            var movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null)
+                return NotFound();
+
+            var actors = _context.Actors_Movies
+                .Where(movieActor => movieActor.MovieId == id)
+                .Join(
+                    _context.Actors,
+                    movieActor => movieActor.ActorId,
+                    actor => actor.Id,
+                    (movieActor, actor) => actor
+                )
+                .ToList();
+
             dynamic mymodel = new ExpandoObject();
-            mymodel.Movie =  _context.Movies.Where(x => x.Id == id).FirstOrDefault();
-            mymodel.Actors = _context.Actors_Movies
-                         .Where(movieActor => movieActor.MovieId == id)
-                         .Join(
-                            _context.Actors,
-                            movieActor => movieActor.ActorId,
-                            actor => actor.Id,
-                            (movieActor, actor) => actor
-                            )
-                         .ToList();
+            mymodel.Movie = movie;
+            mymodel.Actors = actors;
+
             return View(mymodel);
+        }
+
+        [HttpPost]
+        public IActionResult Buy(string title, string price, int quantity)
+        {
+            var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("Confirmation", new { movieId = movie.Id, quantity = quantity });
+        }
+
+        public IActionResult Confirmation(int movieId, int quantity)
+        {
+            
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == movieId);
+
+            ViewData["MovieTitle"] = movie?.Title;
+            ViewData["Quantity"] = quantity;
+
+            return View();
+        }
+
+        public IActionResult Success()
+        {
+           
+            return View();
         }
     }
 }

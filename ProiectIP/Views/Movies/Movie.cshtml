@@ -1,26 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-<div class="container">
+﻿<div class="container">
     <h2>@Model.Movie.Title</h2><br></br>
     <div class="media-container">
-      <img src="@Model.Movie.ImageURL" alt="Nume Film">
-      <br></br>
-      <iframe width="560" height="315" src="@Model.Movie.TrailerURL" title="@Model.Movie.Title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <img src="@Model.Movie.ImageURL" alt="Nume Film">
+        <br></br>
+        <iframe width="560" height="315" src="@Model.Movie.TrailerURL" title="@Model.Movie.Title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
     <br></br>
     <p style="text-align: center;">@Model.Movie.Description</p>
     <br></br>
-        <button>Cumpără Bilet</button>
-            <a class="back-link" href="/movies">Înapoi</a>
-            <br />
-            <br />
-    @foreach(var actor in Model.Actors){
-                            <a href = "/actors/actor/@actor.Id"><img src="@actor.PictureURL" alt="@actor.FullName" width=150px height = 200px>
+    <form method="post" action="@Url.Action("Buy", "Movies")">
+        <input type="hidden" name="title" value="@Model.Movie.Title" />
+        <input type="hidden" name="price" value="@Model.Movie.Price" />
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" />
+
+        <button type="submit">Cumpără Bilet</button>
+    </form>
+    <a class="back-link" href="/movies">Înapoi</a>
+    <br />
+    <br />
+    @foreach(var actor in Model.Actors)
+    {
+        <a href="/actors/actor/@actor.Id"><img src="@actor.PictureURL" alt="@actor.FullName" width=150px height=200px>
         <p>@actor.FullName</p></a>
     }
-
-  </div>
+</div>

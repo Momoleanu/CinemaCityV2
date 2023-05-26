@@ -1,0 +1,13 @@
+﻿@model ProiectIP.Models.Movie
+
+<h2>Buy Movie: @Model.Title</h2>
+
+<form method="post" asp-action="Buy" asp-controller="Movies">
+    <input type="hidden" name="title" value="@Model.Title" />
+    <input type="hidden" name="price" value="@Model.Price" />
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" />
+
+    <button type="submit">Buy</button>
+</form>
