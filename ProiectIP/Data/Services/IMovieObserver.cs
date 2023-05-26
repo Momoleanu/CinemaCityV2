@@ -6,6 +6,9 @@ namespace ProiectIP.Data.Services
     {
         void NotifyMovieAdded(Movie movie);
         void NotifyMovieDeleted(Movie movie);
+
+        void Subscribe(string email);
+        void Unsubscribe(string email);
     }
 
 }

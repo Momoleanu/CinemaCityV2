@@ -15,10 +15,12 @@ namespace ProiectIP.Controllers
     public class MoviesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMovieObserver _movieObserver;
 
-        public MoviesController(AppDbContext context)
+        public MoviesController(AppDbContext context, IMovieObserver movieObserver)
         {
             _context = context;
+            _movieObserver = movieObserver;
         }
 
         public async Task<IActionResult> Index()
@@ -53,6 +55,11 @@ namespace ProiectIP.Controllers
         [HttpPost]
         public IActionResult Buy(string title, string price, int quantity, string email, bool subscribe)
         {
+            Console.WriteLine(title);
+            Console.WriteLine(price);
+            Console.WriteLine(quantity);
+            Console.WriteLine(email);
+            Console.WriteLine(subscribe);
             var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
             if (movie == null)
             {
@@ -61,16 +68,7 @@ namespace ProiectIP.Controllers
 
             if (!string.IsNullOrEmpty(email) && subscribe)
             {
-                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "subscribers.txt");
-                try
-                {
-                    System.IO.File.AppendAllText(filePath, email + Environment.NewLine);
-                    Console.WriteLine("Adresa de email a fost adaugată în fisier.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Eroare la scrierea în fișier: {ex.Message}");
-                }
+                _movieObserver.Subscribe(email);
             }
 
             return RedirectToAction("Confirmation", new { movieId = movie.Id, quantity = quantity });

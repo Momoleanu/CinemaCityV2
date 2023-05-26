@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	 <PackageReference Include="C1.Web.Mvc" Version="4.8.20231.344" />
 	 <PackageReference Include="Microsoft.AspNet.WebApi.HelpPage" Version="5.2.9" />
 	 <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
@@ -15,12 +14,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	  
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="C1.Web.Mvc">
-      <HintPath>bin\Debug\net6.0\C1.Web.Mvc.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
