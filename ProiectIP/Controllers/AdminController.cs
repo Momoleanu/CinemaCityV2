@@ -145,10 +145,7 @@ namespace ProiectIP.Controllers
 
             return RedirectToAction("Index", "Movies");
         }
-        //Nu merge ceva la adaugare da eroare 405 cand pun return View(movie) si nu mai afiseaza nici formularul
-
-
-        //Functia asta doar afiseaza formularul o sa trebuiasca stearsa
+     
         [HttpGet]
         [Authorize("AdminPolicy")]
         [Route("/admin/create-movie")]
@@ -164,7 +161,7 @@ namespace ProiectIP.Controllers
         {
             HttpContext.SignOutAsync("AdminScheme");
             Response.Cookies.Delete("AdminScheme");
-            //Poti sa pui return View("Login") ca sa te dea direct pe formular
+           
             return RedirectToAction("Index", "Home");
         }
 
