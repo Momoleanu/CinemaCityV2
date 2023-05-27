@@ -3,12 +3,19 @@ using ProiectIP.Models;
 
 namespace ProiectIP.Data
 {
+    /// <summary>
+    /// Clasa AppDbContext reprezintă contextul de bază al aplicației pentru accesul la baza de date.
+    /// </summary>
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
+        /// <summary>
+        /// Metoda OnModelCreating este utilizată pentru configurarea relațiilor între tabele în baza de date.
+        /// </summary>
+        /// <param name="modelBuilder">Obiectul ModelBuilder pentru configurarea modelului bazei de date.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Actor_Movie>().HasKey(am => new

@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using System.IO;
 using File = System.IO.File;
 
+/// <summary>
+/// Clasa EmailMovieObserver implementează interfața IMovieObserver și gestionează abonarea, dezabonarea și notificarea observatorilor pentru evenimente legate de filme prin e-mail.
+/// </summary>
 public class EmailMovieObserver : IMovieObserver
 {
     private List<string> subscribers;
     private readonly IEmailService _emailService;
 
+    /// <summary>
+    /// Constructorul clasei EmailMovieObserver.
+    /// </summary>
+    /// <param name="emailService">Serviciul de trimitere a e-mailurilor.</param>
     public EmailMovieObserver(IEmailService emailService)
     {
         _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
@@ -17,23 +24,35 @@ public class EmailMovieObserver : IMovieObserver
         ReadFileEmail();
     }
 
+    /// <summary>
+    /// Metoda Subscribe permite abonarea unui nou e-mail.
+    /// </summary>
+    /// <param name="newEmail">Adresa de e-mail care se abonează.</param>
     public void Subscribe(string newEmail)
     {
         using (StreamWriter sw = File.AppendText("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt"))
         {
-            if (!subscribers.Contains(newEmail)) 
+            if (!subscribers.Contains(newEmail))
             {
                 sw.WriteLine(newEmail);
                 subscribers.Add(newEmail);
             }
-
         }
-
     }
+
+    /// <summary>
+    /// Metoda Unsubscribe permite dezabonarea unui e-mail.
+    /// </summary>
+    /// <param name="email">Adresa de e-mail care se dezabonează.</param>
     public void Unsubscribe(string email)
     {
         subscribers.Remove(email);
     }
+
+    /// <summary>
+    /// Metoda NotifyMovieAdded notifică observatorii când un film nou a fost adăugat.
+    /// </summary>
+    /// <param name="movie">Filmul adăugat.</param>
     public void NotifyMovieAdded(Movie movie)
     {
         try
@@ -47,32 +66,39 @@ public class EmailMovieObserver : IMovieObserver
                 _emailService.SendEmailAsync(subscriber, subject, body).Wait();
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
         }
     }
 
+    /// <summary>
+    /// Metoda NotifyMovieDeleted notifică observatorii când un film a fost șters.
+    /// </summary>
+    /// <param name="movie">Filmul șters.</param>
     public void NotifyMovieDeleted(Movie movie)
     {
         try
         {
             ReadFileEmail();
             string subject = "Notificare: Film șters";
-            string body = $"Implementare Observator pe o lista de subscrieberi. Filmul '{movie.Title}' a fost șters.";
+            string body = $"Implementare Observator pe o listă de abonați. Filmul '{movie.Title}' a fost șters.";
 
             foreach (string subscriber in subscribers)
             {
                 _emailService.SendEmailAsync(subscriber, subject, body).Wait();
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
         }
     }
 
-   public List<string> Subscribers
+    /// <summary>
+    /// Proprietatea Subscribers returnează lista de abonați.
+    /// </summary>
+    public List<string> Subscribers
     {
         get
         {
@@ -80,6 +106,9 @@ public class EmailMovieObserver : IMovieObserver
         }
     }
 
+    /// <summary>
+    /// Metoda ReadFileEmail citește adresele de e-mail din fișierul "subscribers.txt" și le adaugă în lista de abonați.
+    /// </summary>
     private void ReadFileEmail()
     {
         string[] buffer = File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt");

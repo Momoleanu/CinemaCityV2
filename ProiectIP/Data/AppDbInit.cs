@@ -1,14 +1,21 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ProiectIP.Models;
-using System;
 
 namespace ProiectIP.Data
 {
+    /// <summary>
+    /// Clasa AppDbInit este responsabilă de inițializarea bazei de date cu date de test.
+    /// </summary>
     public class AppDbInit
     {
+        /// <summary>
+        /// Metoda Seed este utilizată pentru a adăuga date de test în baza de date.
+        /// </summary>
+        /// <param name="applicationBuilder">Obiectul IApplicationBuilder pentru configurarea aplicației.</param>
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -17,7 +24,7 @@ namespace ProiectIP.Data
 
                 context.Database.EnsureCreated();
 
-                if(!context.Rooms.Any())
+                if (!context.Rooms.Any())
                 {
                     context.Rooms.AddRange(new List<Room>()
                     {
@@ -42,10 +49,10 @@ namespace ProiectIP.Data
                             NoRow = 6,
                             NoColumn = 7
                         }
-                    }
-                        );
+                    });
                     context.SaveChanges();
                 }
+
                 if (!context.Actors.Any())
                 {
                     context.Actors.AddRange(new List<Actor>()
@@ -54,31 +61,30 @@ namespace ProiectIP.Data
                         {
                             FullName = "Eugen Neagoe",
                             PictureURL = "url",
-                            Bio  = "bfdfnggfmnfghmgfm"
+                            Bio = "bfdfnggfmnfghmgfm"
                         },
                         new Actor()
                         {
                             FullName = "Eugen Neagoe",
                             PictureURL = "url",
-                            Bio  = "bfdfnggfmnfghmgfm"
+                            Bio = "bfdfnggfmnfghmgfm"
                         },
                         new Actor()
                         {
                             FullName = "Eugen Neagoe",
                             PictureURL = "url",
-                            Bio  = "bfdfnggfmnfghmgfm"
+                            Bio = "bfdfnggfmnfghmgfm"
                         },
                         new Actor()
                         {
                             FullName = "Eugen Neagoe",
                             PictureURL = "url",
-                            Bio  = "bfdfnggfmnfghmgfm"
+                            Bio = "bfdfnggfmnfghmgfm"
                         }
-
-                    }
-                        );
+                    });
                     context.SaveChanges();
                 }
+
                 if (!context.Movies.Any())
                 {
                     context.Movies.AddRange(new List<Movie>()
@@ -108,7 +114,7 @@ namespace ProiectIP.Data
                         new Movie()
                         {
                             Title = "OMUL-PAIANJEN: PRIN LUMEA PAIANJENULUI",
-                            Description = "Miles Morales revine pentru următorul capitol din saga Spider-Verse, câștigătoare a premiului Oscar. O aventură epică in care prietenosul Om Păianjen isi va uni forțele cu Gwen Stacy și o nouă echipă de Oameni Păianjeni pentru a se confrunta cu un răufăcător mai puternic decât orice au întâlnit vreodată.",
+                            Description = "Miles Morales revine pentru următorul capitol din saga Spider-Verse, câștigătoare a premiului Oscar. O aventură epică în care prietenosul Om Păianjen își va uni forțele cu Gwen Stacy și o nouă echipă de Oameni Păianjeni pentru a se confrunta cu un răufăcător mai puternic decât orice au întâlnit vreodată.",
                             Price = "30",
                             ImageURL = "https://www.cinemacity.ro/xmedia-cw/repo/feats/posters/4923S2R-lg.jpg",
                             StartTime = DateTime.Now.AddDays(-4),
@@ -127,10 +133,10 @@ namespace ProiectIP.Data
                             MovieCategory = MovieCategory.SF,
                             RoomId = 1
                         }
-                    }
-                        );
+                    });
                     context.SaveChanges();
                 }
+
                 if (!context.Actors_Movies.Any())
                 {
                     context.Actors_Movies.AddRange(new List<Actor_Movie>()
@@ -151,7 +157,7 @@ namespace ProiectIP.Data
                             MovieId = 3
                         }
                     });
-                  context.SaveChanges();
+                    context.SaveChanges();
                 }
             }
         }

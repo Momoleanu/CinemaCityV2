@@ -12,9 +12,11 @@ using ProiectIP.Data.Services;
 
 namespace ProiectIP.Controllers
 {
+    /// <summary>
+    /// Controller responsabil de gestionarea acțiunilor și logicii specifice pentru administrator.
+    /// </summary>
     public class AdminController : Controller
     {
-
         private readonly AppDbContext _context;
         private readonly IMovieObserver _movieObserver;
 
@@ -24,6 +26,11 @@ namespace ProiectIP.Controllers
             _movieObserver = movieObserver ?? throw new ArgumentNullException(nameof(movieObserver));
         }
 
+        /// <summary>
+        /// Returnează pagina de autentificare a administratorului.
+        /// </summary>
+        /// <param name="returnUrl">URL-ul către care să se facă redirect după autentificare.</param>
+        /// <returns>View-ul paginii de autentificare.</returns>
         [HttpGet]
         [Route("/admin/login")]
         public IActionResult Login(string returnUrl = "")
@@ -32,6 +39,13 @@ namespace ProiectIP.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Procesează cererea de autentificare a administratorului.
+        /// </summary>
+        /// <param name="username">Numele de utilizator introdus.</param>
+        /// <param name="password">Parola introdusă.</param>
+        /// <param name="returnUrl">URL-ul către care să se facă redirect după autentificare.</param>
+        /// <returns>Rezultatul acțiunii.</returns>
         [HttpPost]
         [Route("/admin/login")]
         public async Task<IActionResult> Login(string username, string password, string returnUrl = "")
@@ -39,13 +53,11 @@ namespace ProiectIP.Controllers
             string[] admin = System.IO.File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\admin.txt");
             if (username == admin[0] && BCrypt.Net.BCrypt.Verify(password, admin[1]))
             {
-
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, username)
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, "AdminScheme");
-
 
                 var authProperties = new AuthenticationProperties
                 {
@@ -53,9 +65,7 @@ namespace ProiectIP.Controllers
                     IsPersistent = true
                 };
 
-
                 var principal = new ClaimsPrincipal(claimsIdentity);
-
 
                 await HttpContext.SignInAsync(principal, authProperties);
 
@@ -65,41 +75,42 @@ namespace ProiectIP.Controllers
                     return RedirectToAction("AdminPage");
             }
 
-
             ViewBag.ErrorMessage = "Nume de utilizator sau parolă incorecte.";
             return View();
         }
 
+        /// <summary>
+        /// Returnează pagina principală pentru administrator, în funcție de starea de autentificare.
+        /// </summary>
+        /// <returns>View-ul paginii principale pentru administrator sau a paginii de autentificare.</returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("/admin")]
         public IActionResult Index()
         {
-
             if (Request.Cookies["admin"] != null && Request.Cookies["admin"] == "true")
             {
-
                 return View("AdminPage");
             }
-
 
             return View("Login");
         }
 
+        /// <summary>
+        /// Returnează pagina de administrare pentru administrator.
+        /// </summary>
+        /// <returns>View-ul paginii de administrare.</returns>
         [HttpGet]
         [Authorize("AdminPolicy")]
         [Route("/admin/adminpage")]
         public IActionResult AdminPage()
         {
-
             if (User.Identity.IsAuthenticated && User.Identity.Name == "admin")
             {
-
                 ViewBag.CanCreateMovies = true;
             }
             else
             {
-
                 ViewBag.CanCreateMovies = false;
             }
 
@@ -109,6 +120,13 @@ namespace ProiectIP.Controllers
 
             return View(mymodel);
         }
+
+        /// <summary>
+        /// Procesează cererea de creare a unui nou film.
+        /// </summary>
+        /// <param name="movie">Obiectul de tip Movie care reprezintă filmul de creat.</param>
+        /// <param name="movieObserver">Serviciul pentru observarea filmelor.</param>
+        /// <returns>Rezultatul acțiunii.</returns>
         [Authorize("AdminPolicy")]
         [Route("/admin/create-movie")]
         [HttpPost]
@@ -126,6 +144,13 @@ namespace ProiectIP.Controllers
 
             return RedirectToAction("AdminPage", "Admin");
         }
+
+        /// <summary>
+        /// Procesează cererea de ștergere a unui film.
+        /// </summary>
+        /// <param name="id">ID-ul filmului de șters.</param>
+        /// <param name="movieObserver">Serviciul pentru observarea filmelor.</param>
+        /// <returns>Rezultatul acțiunii.</returns>
         [Authorize("AdminPolicy")]
         public async Task<IActionResult> DeleteMovie(int id, [FromServices] IMovieObserver movieObserver)
         {
@@ -140,29 +165,33 @@ namespace ProiectIP.Controllers
                 return RedirectToAction("Index", "Movies");
             }
 
-
             return RedirectToAction("Index", "Movies");
         }
-     
+
+        /// <summary>
+        /// Returnează pagina de creare a unui nou film pentru administrator.
+        /// </summary>
+        /// <returns>View-ul paginii de creare a unui nou film.</returns>
         [HttpGet]
         [Authorize("AdminPolicy")]
         [Route("/admin/create-movie")]
         public IActionResult GetCreateMovie()
         {
-
             return View("CreateMovie");
         }
 
+        /// <summary>
+        /// Procesează cererea de delogare a administratorului.
+        /// </summary>
+        /// <returns>Rezultatul acțiunii.</returns>
         [HttpGet]
         [Route("/admin/logout")]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync("AdminScheme");
             Response.Cookies.Delete("AdminScheme");
-           
+
             return RedirectToAction("Index", "Home");
         }
-
-
     }
 }
