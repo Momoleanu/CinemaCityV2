@@ -11,6 +11,11 @@ namespace ProiectIP.Controllers
     public class ActorsController : Controller
     {
         private readonly AppDbContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public ActorsController(AppDbContext context)
         {
             _context = context;

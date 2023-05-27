@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
 	 <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 	 <PackageReference Include="Microsoft.AspNet.WebApi.HelpPage" Version="5.2.9" />
+	 <PackageReference Include="Microsoft.AspNet.WebApi.HelpPage.VB" Version="5.2.9" />
 	 <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />

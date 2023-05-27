@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +10,11 @@ using ProiectIP.Data;
 using ProiectIP.Data.Services;
 using ProiectIP.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+using System.Web.Http;
 
 namespace ProiectIP
 {
@@ -36,7 +37,7 @@ namespace ProiectIP
             services.AddScoped<IMovieObserver, EmailMovieObserver>();
 
             // Configurare Servicii
-           
+
             services.AddTransient<MoviesController>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
@@ -59,7 +60,7 @@ namespace ProiectIP
                         }
                     };
                     options.Cookie.IsEssential = true;
-        });
+                });
 
             services.AddAuthorization(options =>
             {
@@ -86,7 +87,6 @@ namespace ProiectIP
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -128,5 +128,14 @@ namespace ProiectIP
 
             AppDbInit.Seed(app);
         }
+        public static void Register(HttpConfiguration config)
+        {
+            // Uncomment the following to use the documentation from XML documentation file.
+            config.SetDocumentationProvider(
+                new XmlDocumentationProvider(
+                    HttpContext.Current.Server.MapPath("~/App_Data/Documentation.xml")));
+
+        }
     }
+
 }
