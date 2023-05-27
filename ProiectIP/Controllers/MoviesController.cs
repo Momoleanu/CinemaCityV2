@@ -12,23 +12,40 @@ using System.Threading.Tasks;
 
 namespace ProiectIP.Controllers
 {
+    /// <summary>
+    /// Controller pentru gestionarea acțiunilor legate de filme.
+    /// </summary>
     public class MoviesController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IMovieObserver _movieObserver;
 
+        /// <summary>
+        /// Constructor pentru MoviesController.
+        /// </summary>
+        /// <param name="context">Contextul bazei de date.</param>
+        /// <param name="movieObserver">Obiectul observator de filme.</param>
         public MoviesController(AppDbContext context, IMovieObserver movieObserver)
         {
             _context = context;
             _movieObserver = movieObserver;
         }
 
+        /// <summary>
+        /// Acțiune pentru afișarea tuturor filmelor.
+        /// </summary>
+        /// <returns>Vizualizarea listei de filme.</returns>
         public async Task<IActionResult> Index()
         {
             var allMovies = await _context.Movies.ToListAsync();
             return View(allMovies);
         }
 
+        /// <summary>
+        /// Acțiune pentru afișarea detaliilor despre un film specific.
+        /// </summary>
+        /// <param name="id">ID-ul filmului.</param>
+        /// <returns>Vizualizarea detaliilor despre film.</returns>
         public IActionResult Movie(int id)
         {
             var movie = _context.Movies.FirstOrDefault(x => x.Id == id);
@@ -52,10 +69,18 @@ namespace ProiectIP.Controllers
             return View(mymodel);
         }
 
+        /// <summary>
+        /// Acțiune pentru achiziționarea unui bilet pentru un film.
+        /// </summary>
+        /// <param name="title">Titlul filmului.</param>
+        /// <param name="price">Prețul biletului.</param>
+        /// <param name="quantity">Cantitatea de bilete achiziționate.</param>
+        /// <param name="email">Adresa de email a utilizatorului.</param>
+        /// <param name="subscribe">Indicator pentru abonarea la notificări.</param>
+        /// <returns>Redirecționarea către acțiunea de confirmare a achiziției.</returns>
         [HttpPost]
         public IActionResult Buy(string title, string price, int quantity, string email, bool subscribe)
         {
-
             var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
             Console.WriteLine(quantity);
             if (quantity <= 0)
@@ -75,6 +100,12 @@ namespace ProiectIP.Controllers
             return RedirectToAction("Confirmation", new { movieId = movie.Id, quantity = quantity });
         }
 
+        /// <summary>
+        /// Acțiune pentru afișarea paginii de confirmare a achiziției.
+        /// </summary>
+        /// <param name="movieId">ID-ul filmului achiziționat.</param>
+        /// <param name="quantity">Cantitatea de bilete achiziționate.</param>
+        /// <returns>Vizualizarea paginii de confirmare.</returns>
         public IActionResult Confirmation(int movieId, int quantity)
         {
             var movie = _context.Movies.FirstOrDefault(m => m.Id == movieId);
@@ -85,6 +116,10 @@ namespace ProiectIP.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Acțiune pentru afișarea paginii de succes a achiziției.
+        /// </summary>
+        /// <returns>Vizualizarea paginii de succes.</returns>
         public IActionResult Success()
         {
             return View();

@@ -11,23 +11,32 @@ using ProiectIP.Data.Services;
 using ProiectIP.Models;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
-using System.Web.Http;
 
 namespace ProiectIP
 {
+    /// <summary>
+    /// Clasa de configurare a aplicației.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructorul clasei Startup.
+        /// </summary>
+        /// <param name="configuration">Obiectul de configurare al aplicației.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Obiectul de configurare al aplicației.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Metoda apelată de runtime pentru adăugarea serviciilor în container.
+        /// </summary>
+        /// <param name="services">Containerul de servicii.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             // Adaugare db context config
@@ -71,8 +80,11 @@ namespace ProiectIP
             });
         }
 
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Metoda apelată de runtime pentru configurarea pipeline-ului de procesare al cererilor HTTP.
+        /// </summary>
+        /// <param name="app">Obiectul de configurare a aplicației.</param>
+        /// <param name="env">Obiectul de mediu de găzduire al aplicației.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -87,6 +99,7 @@ namespace ProiectIP
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -119,23 +132,14 @@ namespace ProiectIP
                 );
 
                 endpoints.MapControllerRoute(
-                     name: "buy-ticket",
-                     pattern: "movies/buy/{title}/{price}/{quantity}",
-                     defaults: new { controller = "Movies", action = "Buy" }
-                 );
+                    name: "buy-ticket",
+                    pattern: "movies/buy/{title}/{price}/{quantity}",
+                    defaults: new { controller = "Movies", action = "Buy" }
+                );
             });
 
 
             AppDbInit.Seed(app);
         }
-        public static void Register(HttpConfiguration config)
-        {
-            // Uncomment the following to use the documentation from XML documentation file.
-            config.SetDocumentationProvider(
-                new XmlDocumentationProvider(
-                    HttpContext.Current.Server.MapPath("~/App_Data/Documentation.xml")));
-
-        }
     }
-
 }

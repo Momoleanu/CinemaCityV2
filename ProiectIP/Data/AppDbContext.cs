@@ -8,6 +8,9 @@ namespace ProiectIP.Data
     /// </summary>
     public class AppDbContext : DbContext
     {
+        /// <summary>
+        /// Constructor vid 
+        /// </summary>
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
