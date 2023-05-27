@@ -3,7 +3,6 @@ using ProiectIP.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using static System.Net.WebRequestMethods;
 using File = System.IO.File;
 
 public class EmailMovieObserver : IMovieObserver
