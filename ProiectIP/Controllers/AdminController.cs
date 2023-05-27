@@ -50,7 +50,7 @@ namespace ProiectIP.Controllers
         [Route("/admin/login")]
         public async Task<IActionResult> Login(string username, string password, string returnUrl = "")
         {
-            string[] admin = System.IO.File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\admin.txt");
+            string[] admin = System.IO.File.ReadAllLines("Data\\admin.txt");
             if (username == admin[0] && BCrypt.Net.BCrypt.Verify(password, admin[1]))
             {
                 var claims = new[]

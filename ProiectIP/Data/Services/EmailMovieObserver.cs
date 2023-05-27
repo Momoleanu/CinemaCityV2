@@ -30,7 +30,7 @@ public class EmailMovieObserver : IMovieObserver
     /// <param name="newEmail">Adresa de e-mail care se abonează.</param>
     public void Subscribe(string newEmail)
     {
-        using (StreamWriter sw = File.AppendText("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt"))
+        using (StreamWriter sw = File.AppendText("Data\\subscribers.txt"))
         {
             if (!subscribers.Contains(newEmail))
             {
@@ -111,7 +111,7 @@ public class EmailMovieObserver : IMovieObserver
     /// </summary>
     private void ReadFileEmail()
     {
-        string[] buffer = File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt");
+        string[] buffer = File.ReadAllLines("Data\\subscribers.txt");
         for (int i = 0; i < buffer.Length; i++)
         {
             subscribers.Add(buffer[i]);
