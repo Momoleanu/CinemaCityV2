@@ -6,9 +6,8 @@
 <form method="post" asp-action="Buy" asp-controller="Movies">
     <input type="hidden" name="title" value="@Model.Title" />
     <input type="hidden" name="price" value="@Model.Price" />
-
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" />
+    <input type="number" name="quantity" id="quantity" required />
 
     <button type="submit">Buy</button>
 </form>

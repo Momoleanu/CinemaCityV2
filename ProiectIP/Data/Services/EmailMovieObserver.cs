@@ -21,8 +21,12 @@ public class EmailMovieObserver : IMovieObserver
     {
         using (StreamWriter sw = File.AppendText("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt"))
         {
-            sw.WriteLine(newEmail);
-            subscribers.Add(newEmail);
+            if (!subscribers.Contains(newEmail)) 
+            {
+                sw.WriteLine(newEmail);
+                subscribers.Add(newEmail);
+            }
+
         }
 
     }
@@ -78,7 +82,7 @@ public class EmailMovieObserver : IMovieObserver
 
     private void ReadFileEmail()
     {
-        string[] buffer = File.ReadAllLines("C:\\Users\\mihne\\Desktop\\Programare\\ProiectIP\\ProiectIP\\Data\\subscribers.txt");
+        string[] buffer = File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\subscribers.txt");
         for (int i = 0; i < buffer.Length; i++)
         {
             subscribers.Add(buffer[i]);

@@ -55,7 +55,13 @@ namespace ProiectIP.Controllers
         [HttpPost]
         public IActionResult Buy(string title, string price, int quantity, string email, bool subscribe)
         {
+
             var movie = _context.Movies.FirstOrDefault(m => m.Title == title);
+            Console.WriteLine(quantity);
+            if (quantity <= 0)
+            {
+                return Redirect($"/Movies/Movie/{movie.Id}");
+            }
             if (movie == null)
             {
                 return NotFound();

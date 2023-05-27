@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ProiectIP.Models;
-using Microsoft.EntityFrameworkCore;
 using ProiectIP.Data.Services;
 
 namespace ProiectIP.Controllers
@@ -38,7 +37,6 @@ namespace ProiectIP.Controllers
         public async Task<IActionResult> Login(string username, string password, string returnUrl = "")
         {
             string[] admin = System.IO.File.ReadAllLines("C:\\Users\\Dumitru Andrei\\Source\\Repos\\ProiectIP\\ProiectIP\\Data\\admin.txt");
-            Console.WriteLine(BCrypt.Net.BCrypt.HashPassword("admin"));
             if (username == admin[0] && BCrypt.Net.BCrypt.Verify(password, admin[1]))
             {
 

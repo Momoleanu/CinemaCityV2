@@ -15,7 +15,7 @@
     <form method="post" action="@Url.Action("Buy", "Movies")">
         <input type="hidden" name="title" value="@Model.Movie.Title" />
         <input type="hidden" name="price" value="@Model.Movie.Price" />
-
+        <h4>Cantitatea mai mare ca 0</h4>
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" id="quantity" />
 
