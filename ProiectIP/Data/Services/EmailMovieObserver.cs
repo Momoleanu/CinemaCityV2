@@ -1,4 +1,23 @@
-﻿using ProiectIP.Data.Services;
+﻿/**************************************************************************
+ *                                                                        *
+ *  Description: Sistem de rezervari bilete cinema                        *
+ *  Website:     https://github.com/Momoleanu/ProiectIP                   *
+ *  Copyright:   (c) 2023, Holban Mihnea, Dumitru Andrei                  *
+ *                                                                        *
+ *  This code and information is provided "as is" without warranty of     *
+ *  any kind, either expressed or implied, including but not limited      *
+ *  to the implied warranties of merchantability or fitness for a         *
+ *  particular purpose. You are free to use this source code in your      *
+ *  applications as long as the original copyright notice is included.    *
+ *                                                                        *
+ *  Clasa EmailMovieObserver implementează interfața IMovieObserver și    *
+ *  gestionează abonarea, dezabonarea și notificarea observatorilor       *
+ *  pentru evenimente legate de filme prin e-mail.                        *
+ *                                                                        *
+ **************************************************************************/
+
+
+using ProiectIP.Data.Services;
 using ProiectIP.Models;
 using System;
 using System.Collections.Generic;
