@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+	<meta name="generator" content="HelpNDoc Personal Edition 4.9.2.132">
+</head>
+
+<body>
+
+	<object type="text/site properties">
+		<param name="Font" value="Arial,8,0">
+		<param name="Window Styles" value="0x800025">
+	</object>
+    
+	<ul>
+
+	<li> <object type="text/sitemap">
+				<param name="Name" value="Introducere">
+				<param name="Local" value="Introducere.htm">
+				</object>
+
+	<ul><li> <object type="text/sitemap">
+				<param name="Name" value="Descriere generala">
+				<param name="Local" value="Descrieregenerala.htm">
+				</object>
+
+	</li></ul></li><li> <object type="text/sitemap">
+				<param name="Name" value="Functionalitati">
+				<param name="Local" value="Functionalitati.htm">
+				</object>
+
+	<ul><li> <object type="text/sitemap">
+				<param name="Name" value="Desenare">
+				<param name="Local" value="Desenare.htm">
+				</object>
+
+	</li><li> <object type="text/sitemap">
+				<param name="Name" value="Salvare">
+				<param name="Local" value="Salvare.htm">
+				</object>
+
+	</li></ul></li></ul>
+    
+</body>
+
+</html>
+

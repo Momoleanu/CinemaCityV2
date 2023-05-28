@@ -19,4 +19,10 @@
 	  
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\MagicHelp.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
