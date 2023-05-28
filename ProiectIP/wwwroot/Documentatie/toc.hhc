@@ -1,0 +1,199 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+	<meta name="generator" content="HelpNDoc Personal Edition 8.7.0.500">
+</head>
+
+<body>
+
+	<object type="text/site properties">
+		<param name="Font" value="Arial,8,0">
+		<param name="Window Styles" value="0x800025">
+	</object>
+    
+	<ul>
+
+	
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Introducere">
+				
+					<param name="Local" value="Introducere.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Descriere Generala">
+				
+					<param name="Local" value="DescriereGenerala.htm">
+				
+					<param name="ImageNumber" value="9">
+				
+			</object>
+
+	</li></ul></li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Functionalitati">
+				
+					<param name="Local" value="Functionalitati.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Utilizator">
+				
+					<param name="Local" value="Utilizator.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Vizualizare lista filme">
+				
+					<param name="Local" value="Vizualizarelistafilme.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Viizualizare film">
+				
+					<param name="Local" value="Viizualizarefilm.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Vizualizare trailer filme">
+				
+					<param name="Local" value="Vizualizaretrailerfilme.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Vizualizare detalii filme">
+				
+					<param name="Local" value="Vizualizaredetaliifilme.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Vizualizare actori">
+				
+					<param name="Local" value="Vizualizareactori.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Vizualizare detalii actor">
+				
+					<param name="Local" value="Vizualizaredetaliiactor.htm">
+				
+			</object>
+
+	</li></ul></li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Cumparare bilet">
+				
+					<param name="Local" value="Cumpararebilet.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Rezervare loc">
+				
+					<param name="Local" value="Rezervareloc.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Abonare la newsletter">
+				
+					<param name="Local" value="Abonarelanewsletter.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Confirmarea achizitiei">
+				
+					<param name="Local" value="Confirmareaachizitiei.htm">
+				
+			</object>
+
+	</li></ul></li></ul></li></ul></li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Administrator">
+				
+					<param name="Local" value="Administrator.htm">
+				
+			</object>
+
+	<ul>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Adaugare filme">
+				
+					<param name="Local" value="Adaugarefilme.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Stergere filme">
+				
+					<param name="Local" value="Stergerefilme.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Stergere abonati de la newsletter">
+				
+					<param name="Local" value="Stergereabonatidelanewsletter.htm">
+				
+			</object>
+
+	</li>
+
+			<li> <object type="text/sitemap">
+				<param name="Name" value="Abonati">
+				
+					<param name="Local" value="Abonati.htm">
+				
+			</object>
+
+	</li></ul></li></ul></li>
+	
+	</ul>
+    
+</body>
+
+</html>
+
