@@ -18,6 +18,7 @@
 namespace ProiectIP.Data.Services
 {
     using ProiectIP.Models;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Interfața IMovieObserver definește contractul pentru un observator de filme.
@@ -47,5 +48,9 @@ namespace ProiectIP.Data.Services
         /// </summary>
         /// <param name="email">Adresa de e-mail a utilizatorului.</param>
         void Unsubscribe(string email);
+        public List<string> Subscribers
+        {
+            get;
+        }
     }
 }

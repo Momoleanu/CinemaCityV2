@@ -121,6 +121,7 @@ public class EmailMovieObserver : IMovieObserver
     {
         get
         {
+            ReadFileEmail();
             return subscribers;
         }
     }
@@ -130,6 +131,7 @@ public class EmailMovieObserver : IMovieObserver
     /// </summary>
     private void ReadFileEmail()
     {
+        subscribers.Clear();
         string[] buffer = File.ReadAllLines("Data\\subscribers.txt");
         for (int i = 0; i < buffer.Length; i++)
         {

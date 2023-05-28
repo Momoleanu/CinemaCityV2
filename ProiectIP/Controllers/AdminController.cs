@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ProiectIP.Models;
 using ProiectIP.Data.Services;
+using System.IO;
 
 namespace ProiectIP.Controllers
 {
@@ -212,6 +213,23 @@ namespace ProiectIP.Controllers
             Response.Cookies.Delete("AdminScheme");
 
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        [Route("/admin/subscribers")]
+        public  IActionResult Subscribers()
+        {
+            var subscribers =  _movieObserver.Subscribers;
+            return View(subscribers);
+        }
+        [HttpGet]
+        [Route("/admin/delete-subscribers")]
+        public IActionResult DeleteSubscribers()
+        {
+            using (StreamWriter writer = new StreamWriter("Data\\subscribers.txt"))
+            {
+                writer.Write("");
+            }
+            return RedirectToAction("Subscribers", "Admin");
         }
     }
 }
