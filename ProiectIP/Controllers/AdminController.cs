@@ -214,6 +214,11 @@ namespace ProiectIP.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        /// <summary>
+        ///  Returnează pagina de vizualizare a tuturor abonatilor
+        /// </summary>
+        /// <returns>View-ul paginii de vizualizare abonati</returns>
         [HttpGet]
         [Route("/admin/subscribers")]
         public  IActionResult Subscribers()
@@ -221,6 +226,11 @@ namespace ProiectIP.Controllers
             var subscribers =  _movieObserver.Subscribers;
             return View(subscribers);
         }
+
+        /// <summary>
+        /// Proceseaza cererea de stergere abonati 
+        /// </summary>
+        /// <returns>View-ul paginii de vizualizare abonati</returns>
         [HttpGet]
         [Route("/admin/delete-subscribers")]
         public IActionResult DeleteSubscribers()
