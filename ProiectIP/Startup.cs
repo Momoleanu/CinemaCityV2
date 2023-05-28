@@ -136,6 +136,12 @@ namespace ProiectIP
                     pattern: "movies/buy/{title}/{price}/{quantity}",
                     defaults: new { controller = "Movies", action = "Buy" }
                 );
+                endpoints.MapControllerRoute(
+                    name: "help-page",
+                    pattern: "helpPage",
+                    defaults: new { controller = "HelpPage", action = "Index" }
+);
+
             });
 
 

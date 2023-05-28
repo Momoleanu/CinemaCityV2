@@ -36,6 +36,10 @@ namespace ProiectIP.Controllers
         private readonly AppDbContext _context;
         private readonly IMovieObserver _movieObserver;
 
+        /// <summary>
+        /// Constructor controller Admin
+        /// </summary>
+ 
         public AdminController(AppDbContext context, IMovieObserver movieObserver)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
